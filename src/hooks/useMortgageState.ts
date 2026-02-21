@@ -39,8 +39,9 @@ export function useMortgageState(key: string) {
       try {
         const parsed = JSON.parse(saved);
         return {
+          ...defaultInput,
           ...parsed,
-          startDate: new Date(parsed.startDate),
+          startDate: parsed.startDate ? new Date(parsed.startDate) : new Date(),
           oneTimePayments: parsed.oneTimePayments?.map((p: { amount: number; date: string }) => ({
             ...p,
             date: new Date(p.date),
